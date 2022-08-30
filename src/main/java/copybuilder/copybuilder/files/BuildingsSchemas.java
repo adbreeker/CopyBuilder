@@ -90,11 +90,11 @@ public class BuildingsSchemas
         return SchemaBlocks;
     }
 
-    public static void buildSchema(String schema, Player player)
+    public static void buildSchema(String schema, Player player, String arg)
     {
         if(!customFile.contains(schema))
         {
-            player.sendMessage("This schema isnt exists!");
+            player.sendMessage("This schema does not exists!");
         }
         else
         {
@@ -102,13 +102,51 @@ public class BuildingsSchemas
             List<String> blocks = (List<String>)  customFile.getList(schema);
             for(String block : blocks)
             {
-                Material material = Material.getMaterial(block.split("/")[1]);
-                int x = Integer.parseInt(block.split("/")[0].split(" ")[0]);
-                int y = Integer.parseInt(block.split("/")[0].split(" ")[1]);
-                int z = Integer.parseInt(block.split("/")[0].split(" ")[2]);
+                if(arg.equals("classic"))
+                {
+                    Material material = Material.getMaterial(block.split("/")[1]);
+                    int x = Integer.parseInt(block.split("/")[0].split(" ")[0]);
+                    int y = Integer.parseInt(block.split("/")[0].split(" ")[1]);
+                    int z = Integer.parseInt(block.split("/")[0].split(" ")[2]);
 
-                player.getWorld().getBlockAt(pl.getBlockX()+x, pl.getBlockY()+y, pl.getBlockZ()+z).setType(material);
+                    player.getWorld().getBlockAt(pl.getBlockX()+x, pl.getBlockY()+y, pl.getBlockZ()+z).setType(material);
+                }
+                if(arg.equals("solid"))
+                {
+                    Material material = Material.getMaterial(block.split("/")[1]);
+                    int x = Integer.parseInt(block.split("/")[0].split(" ")[0]);
+                    int y = Integer.parseInt(block.split("/")[0].split(" ")[1]);
+                    int z = Integer.parseInt(block.split("/")[0].split(" ")[2]);
+                    if(!material.isSolid())
+                    {
+                        player.getWorld().getBlockAt(pl.getBlockX()+x, pl.getBlockY()+y, pl.getBlockZ()+z).setType(Material.AIR);
+                    }
+                    else
+                    {
+                        player.getWorld().getBlockAt(pl.getBlockX()+x, pl.getBlockY()+y, pl.getBlockZ()+z).setType(material);
+                    }
+                }
+                if(!arg.equals("classic") && !arg.equals("solid"))
+                {
+                    player.sendMessage("There is no such building type like: " + arg);
+                    return;
+                }
             }
+        }
+    }
+
+    public static void deleteSchema(String schema, Player player)
+    {
+        if(!customFile.contains(schema))
+        {
+            player.sendMessage("This schema does not exists!");
+        }
+        else
+        {
+            player.sendMessage("Deleting schema: " + schema);
+            customFile.set(schema, null);
+            save();
+            reload();
         }
     }
 }

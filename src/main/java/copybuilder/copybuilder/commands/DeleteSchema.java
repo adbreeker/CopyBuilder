@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 import java.util.Arrays;
 
-public class BuildSchema implements CommandExecutor
+public class DeleteSchema implements CommandExecutor
 {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
@@ -20,22 +20,29 @@ public class BuildSchema implements CommandExecutor
         }
         Player player = (Player) sender;
 
-        if (command.getName().equalsIgnoreCase("cb_build"))
+        if (command.getName().equalsIgnoreCase("cb_delete_schema"))
         {
             if(Arrays.stream(args).count() == 0)
             {
-                sender.sendMessage("No schema name");
+                player.sendMessage("No schema name");
                 return true;
             }
             else
             {
+                if(Arrays.stream(args).count() == 1)
+                {
+                    player.sendMessage("After schema name you have to write \"CONFIRM\" to confirm deleting schema");
+                }
                 if(Arrays.stream(args).count() > 1)
                 {
-                    BuildingsSchemas.buildSchema(args[0], player, args[1]);
-                }
-                else
-                {
-                    BuildingsSchemas.buildSchema(args[0], player, "classic");
+                    if(args[1].equals("CONFIRM"))
+                    {
+                        BuildingsSchemas.deleteSchema(args[0], player);
+                    }
+                    else
+                    {
+                        player.sendMessage("After schema name you have to write \"CONFIRM\" to confirm deleting schema");
+                    }
                 }
             }
         }

@@ -1,9 +1,6 @@
 package copybuilder.copybuilder;
 
-import copybuilder.copybuilder.commands.BuildSchema;
-import copybuilder.copybuilder.commands.CreateBuildingField;
-import copybuilder.copybuilder.commands.GiveSchemaCreator;
-import copybuilder.copybuilder.commands.ListOfSchemas;
+import copybuilder.copybuilder.commands.*;
 import copybuilder.copybuilder.files.BuildingsSchemas;
 import copybuilder.copybuilder.handlers.CreateSchemaWithItem;
 import copybuilder.copybuilder.items.ItemManager;
@@ -24,6 +21,7 @@ public final class CopyBuilder extends JavaPlugin {
         getCommand("cb_schema_creator").setExecutor(new GiveSchemaCreator());
         getCommand("cb_schemas").setExecutor(new ListOfSchemas());
         getCommand("cb_build").setExecutor(new BuildSchema());
+        getCommand("cb_delete_schema").setExecutor(new DeleteSchema());
 
         // handlers------------------------------------------------------------------------------------------------------
         getServer().getPluginManager().registerEvents(new CreateSchemaWithItem(this),this);

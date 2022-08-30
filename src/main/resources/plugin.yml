@@ -13,3 +13,5 @@ commands:
     description: shows list of available schemas
   cb_build:
     description: building one of available schemas
+  cb_delete_schema:
+    description: allows you to delete one of schemas

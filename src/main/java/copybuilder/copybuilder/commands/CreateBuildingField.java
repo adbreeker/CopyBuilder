@@ -65,7 +65,35 @@ public class CreateBuildingField implements CommandExecutor
                                 }
                                 else
                                 {
-                                    if(x == 0 && z == 0 && y == -1)
+                                    if(x == 0 && z == 0)
+                                    {
+                                        block_to_change.setType(Material.DIAMOND_BLOCK);
+                                    }
+                                    else
+                                    {
+                                        block_to_change.setType(Material.BEDROCK);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if(args[1].equals("void"))
+                {
+                    for(int x = ((radius+5) * -1); x<(radius+5); x++)
+                    {
+                        for(int y = -63; y<=319; y++)
+                        {
+                            for(int z = ((radius+5) * -1); z<(radius+5); z++)
+                            {
+                                Block block_to_change = pl.getWorld().getBlockAt(pl.getBlockX()+x, y, pl.getBlockZ()+z);
+                                if((x < (radius*-1) || x > radius) || (z < (radius*-1) || z > radius) || y!= (pl.getBlockY()-1))
+                                {
+                                    block_to_change.setType(Material.AIR);
+                                }
+                                else
+                                {
+                                    if(x == 0 && z == 0)
                                     {
                                         block_to_change.setType(Material.DIAMOND_BLOCK);
                                     }

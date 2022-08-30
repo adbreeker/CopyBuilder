@@ -1,0 +1,15 @@
+name: CopyBuilder
+version: '${project.version}'
+main: copybuilder.copybuilder.CopyBuilder
+api-version: 1.19
+authors: [ adbreeker ]
+description: Plugin enables you to copy building and past them on the other places or even worlds
+commands:
+  cb_make_field:
+    description: making field for building
+  cb_schema_creator:
+    description: gives player a schema creator
+  cb_schemas:
+    description: shows list of available schemas
+  cb_build:
+    description: building one of available schemas
